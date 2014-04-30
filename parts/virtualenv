@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+./python/bin/pyvenv .heroku/python
+source ./.heroku/python/bin/activate
