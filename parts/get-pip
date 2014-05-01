@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
 set -e
-curl -O https://raw.github.com/pypa/pip/master/contrib/get-pip.py
+curl -O https://raw.githubusercontent.com/pypa/pip/master/contrib/get-pip.py
 python get-pip.py
 rm get-pip.py
