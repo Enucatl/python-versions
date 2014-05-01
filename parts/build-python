@@ -37,6 +37,10 @@ pyenv rehash
 pyenv shell $1
 
 echo ""
+echo "Installing Setuptools..."
+pip install setuptools
+
+echo ""
 echo "Building HDF5..."
 ./parts/hdf5
 
