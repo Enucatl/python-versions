@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 
 set -e
-./python/bin/pyvenv .heroku/python
+./python/bin/pyvenv --clear .heroku/python
