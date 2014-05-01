@@ -6,10 +6,12 @@ set -x
 
 OUT_PREFIX=$1
 
+echo ""
 echo "Building Mercurial..."
 ./parts/mercurial
 export PATH=$HOME/mercurial:$PATH
 
+echo ""
 echo "Building pyenv..."
 git clone git://github.com/yyuu/pyenv.git .pyenv
 export PYENV_ROOT=$(pwd)/.pyenv
@@ -20,14 +22,31 @@ export CPLUS_INCLUDE_PATH=$PYENV_ROOT/include:$CPLUS_INCLUDE_PATH
 export LIBRARY_PATH=$PYENV_ROOT/lib:$LIBRARY_PATH
 export LD_LIBRARY_PATH=$PYENV_ROOT/lib:$LD_LIBRARY_PATH
 
+echo ""
 echo "Building SQLite..."
 ./parts/sqlite $PYENV_ROOT
 
+echo ""
 echo "Building Python..."
 pyenv install stackless-3.3-dev
 pyenv rehash
 
 which python
 which pip
+
+pyenv shell stackless-3.3-dev
+
+echo ""
+echo "Building HDF5..."
 ./parts/hdf5
+
+echo ""
+which python
+python --version
+
+which pip
+pip --version
+
+echo ""
+echo "Building other python packages..."
 ./parts/build-requirements
