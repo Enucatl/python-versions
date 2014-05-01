@@ -5,15 +5,9 @@ HDF5FILE=hdf5-1.8.11-snap16
 curl -O ftp://ftp.hdfgroup.uiuc.edu/pub/outgoing/hdf5/snapshots/v18/${HDF5FILE}.tar.gz
 tar xf ${HDF5FILE}.tar.gz
 rm ${HDF5FILE}.tar.gz
-OUT_PREFIX=$(pwd)/.heroku/python
 cd ${HDF5FILE}
-./configure --prefix=$OUT_PREFIX
+./configure --prefix=$PYENV_ROOT
 make
 make install
 cd -
-export C_INCLUDE_PATH=$OUT_PREFIX/include:$C_INCLUDE_PATH
-export CPLUS_INCLUDE_PATH=$OUT_PREFIX/include:$CPLUS_INCLUDE_PATH
-export LIBRARY_PATH=$OUT_PREFIX/lib:$LIBRARY_PATH
-export LD_LIBRARY_PATH=$OUT_PREFIX/lib:$LD_LIBRARY_PATH
-
 rm -r ${HDF5FILE}

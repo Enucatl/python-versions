@@ -6,9 +6,6 @@ set -x
 
 OUT_PREFIX=$1
 
-echo "Building SQLite..."
-./parts/sqlite $OUT_PREFIX
-
 echo "Building Mercurial..."
 ./parts/mercurial
 export PATH=$HOME/mercurial:$PATH
@@ -18,6 +15,13 @@ git clone git://github.com/yyuu/pyenv.git .pyenv
 export PYENV_ROOT=$(pwd)/.pyenv
 export PATH=$PYENV_ROOT/bin:$PATH
 eval "$(pyenv init -)"
+export C_INCLUDE_PATH=$PYENV_ROOT/include:$C_INCLUDE_PATH
+export CPLUS_INCLUDE_PATH=$PYENV_ROOT/include:$CPLUS_INCLUDE_PATH
+export LIBRARY_PATH=$PYENV_ROOT/lib:$LIBRARY_PATH
+export LD_LIBRARY_PATH=$PYENV_ROOT/lib:$LD_LIBRARY_PATH
+
+echo "Building SQLite..."
+./parts/sqlite $PYENV_ROOT
 
 echo "Building Python..."
 pyenv install stackless-3.3-dev
