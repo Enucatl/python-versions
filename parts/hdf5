@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 HDF5FILE=hdf5-1.8.11-snap16
-wget ftp://ftp.hdfgroup.uiuc.edu/pub/outgoing/hdf5/snapshots/v18/${HDF5FILE}.tar.gz
+curl -O ftp://ftp.hdfgroup.uiuc.edu/pub/outgoing/hdf5/snapshots/v18/${HDF5FILE}.tar.gz
 tar xf ${HDF5FILE}.tar.gz
 rm ${HDF5FILE}.tar.gz
 OUT_PREFIX=$(pwd)/.heroku/python
