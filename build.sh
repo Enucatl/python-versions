@@ -55,15 +55,7 @@ if [ ! "$PREFIX_PATH" ]; then
 fi
 
 
-echo "------> Building Formula $FORMULA"
-FORMULA_PATH=$(pwd)/formula/$FORMULA
-
-if [ ! -f $FORMULA_PATH ]; then
-    echo "Formula '$FORMULA' does not exist." >&2
-    exit 1;
-fi
-
-$(pwd)/formula/$FORMULA $PREFIX_PATH | indent
+$(pwd)/parts/build-python $FORMULA | indent
 
 if [ "$ARCHIVE" ]; then
     echo "------> Archiving $FORMULA"
@@ -74,4 +66,3 @@ if [ "$S3_BUCKET" ]; then
     echo "------> Releasing $FORMULA"
     s3put -b $S3_BUCKET $ARCHIVE
 fi
-

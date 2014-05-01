@@ -2,7 +2,6 @@
 # Options: <output-dir>
 
 set -e
-set -x
 
 OUT_PREFIX=$1
 
@@ -26,13 +25,16 @@ echo ""
 echo "Building SQLite..."
 ./parts/sqlite $PYENV_ROOT
 
+echo ""
+echo "Forgetting about the default python..."
 unset PYTHONPATH
 unset PYTHONHOME
+
 echo ""
 echo "Building Python..."
-pyenv install stackless-3.3-dev
+pyenv install $1
 pyenv rehash
-pyenv shell stackless-3.3-dev
+pyenv shell $1
 
 echo ""
 echo "Building HDF5..."
