@@ -9,12 +9,18 @@ OUT_PREFIX=$1
 echo "Building SQLite..."
 ./parts/sqlite $OUT_PREFIX
 
+rm -rf .heroku/python
+export PYTHONPATH=
+export PYTHONHOME=
+
 echo "Building Python..."
 SOURCE_TARBALL='http://www.stackless.com/binaries/stackless-335-export.tar.bz2'
 curl -L $SOURCE_TARBALL | tar xj
 mv stackless-335-export src
 cd src
 
+echo "PYTHONPATH" $PYTHONPATH
+echo "PYTHONHOME" $PYTHONHOME
 ./configure --prefix=$OUT_PREFIX
 make
 make install
