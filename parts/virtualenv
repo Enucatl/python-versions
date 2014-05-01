@@ -2,4 +2,4 @@
 
 set -e
 
-./python/bin/pyvenv --clear .heroku/python
+./python/bin/pyvenv newpython
