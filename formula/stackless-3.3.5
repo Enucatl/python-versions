@@ -26,14 +26,12 @@ echo ""
 echo "Building SQLite..."
 ./parts/sqlite $PYENV_ROOT
 
+unset PYTHONPATH
+unset PYTHONHOME
 echo ""
 echo "Building Python..."
 pyenv install stackless-3.3-dev
 pyenv rehash
-
-which python
-which pip
-
 pyenv shell stackless-3.3-dev
 
 echo ""
