@@ -1,0 +1,6 @@
+#!/usr/bin/env bash
+
+curl -s http://mercurial.selenic.com/release/mercurial-3.0-rc.tar.gz | tar xz
+mv mercurial-3.0-rc mercurial
+make -C mercurial local
+export PATH=$(pwd)/mercurial:$PATH
