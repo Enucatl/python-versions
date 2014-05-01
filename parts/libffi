@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Usage: $ build.sh <output-dir>
 
+set -e
 OUT_PREFIX=$1
 SOURCE_TARBALL='ftp://sourceware.org/pub/libffi/libffi-3.0.13.tar.gz'
 

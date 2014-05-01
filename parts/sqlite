@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # Usage: $ build.sh <output-dir>
 
+set -e
 OUT_PREFIX=$1
 SOURCE_TARBALL='http://www.sqlite.org/sqlite-autoconf-3070900.tar.gz'
 
