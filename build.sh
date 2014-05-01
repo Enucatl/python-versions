@@ -67,7 +67,7 @@ $(pwd)/formula/$FORMULA $PREFIX_PATH | indent
 
 if [ "$ARCHIVE" ]; then
     echo "------> Archiving $FORMULA"
-    tar cjf $ARCHIVE $PREFIX_SHORT_PATH/ .heroku/python
+    tar cjf $ARCHIVE .pyenv
 fi
 
 if [ "$S3_BUCKET" ]; then
