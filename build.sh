@@ -54,8 +54,33 @@ if [ ! "$PREFIX_PATH" ]; then
     exit 1;
 fi
 
+set -e
+set -x
 
 $(pwd)/parts/build-python $FORMULA | indent
+export PYENV_ROOT=$(pwd)/.pyenv
+export PATH=$PYENV_ROOT/bin:$PATH
+eval "$(pyenv init -)"
+unset PYTHONPATH
+unset PYTHONHOME
+
+pyenv rehash
+pyenv versions
+echo $FORMULA > .python-version
+pyenv versions
+
+ls .pyenv/shims
+pyenv versions
+
+which pyenv
+which python
+which pip
+
+ls .pyenv/shims
+pyenv versions
+
+set +e
+set +x
 
 if [ "$ARCHIVE" ]; then
     echo "------> Archiving $FORMULA"
