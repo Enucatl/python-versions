@@ -11,7 +11,6 @@ function puts-step (){
   echo "-----> $@"
 }
 
-
 # Argument parsing.
 while getopts ":f:x:p:r:" opt; do
   case $opt in
@@ -54,33 +53,17 @@ if [ ! "$PREFIX_PATH" ]; then
     exit 1;
 fi
 
-set -e
-set -x
-
-$(pwd)/parts/build-python $FORMULA | indent
-export PYENV_ROOT=$(pwd)/.pyenv
-export PATH=$PYENV_ROOT/bin:$PATH
-eval "$(pyenv init -)"
-unset PYTHONPATH
-unset PYTHONHOME
-
-pyenv rehash
-pyenv versions
 echo $FORMULA > .python-version
-pyenv versions
+$(pwd)/parts/build-python $FORMULA | indent
 
-ls .pyenv/shims
-pyenv versions
+echo ""
+echo "Building more libs..."
+./parts/libs
 
-which pyenv
-which python
-which pip
+echo ""
+echo "Building other python packages..."
+./parts/build-requirements
 
-ls .pyenv/shims
-pyenv versions
-
-set +e
-set +x
 
 if [ "$ARCHIVE" ]; then
     echo "------> Archiving $FORMULA"
@@ -89,5 +72,5 @@ fi
 
 if [ "$S3_BUCKET" ]; then
     echo "------> Releasing $FORMULA"
-    s3put -b $S3_BUCKET $ARCHIVE
+    aws s3 cp $ARCHIVE s3://$S3_BUCKET
 fi

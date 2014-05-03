@@ -1,56 +1,19 @@
 #!/usr/bin/env bash
 # Options: <output-dir>
 
-set -e
-
 OUT_PREFIX=$1
-
-echo ""
-echo "Building Mercurial..."
-./parts/mercurial
-export PATH=$HOME/mercurial:$PATH
-
-echo ""
-echo "Building pyenv..."
-git clone git://github.com/yyuu/pyenv.git .pyenv
-export PYENV_ROOT=$(pwd)/.pyenv
-export PATH=$PYENV_ROOT/bin:$PATH
-eval "$(pyenv init -)"
-
-export C_INCLUDE_PATH=$PYENV_ROOT/include:$C_INCLUDE_PATH
-export CPLUS_INCLUDE_PATH=$PYENV_ROOT/include:$CPLUS_INCLUDE_PATH
-export LIBRARY_PATH=$PYENV_ROOT/lib:$LIBRARY_PATH
-export LD_LIBRARY_PATH=$PYENV_ROOT/lib:$LD_LIBRARY_PATH
 
 echo ""
 echo "Building SQLite..."
 ./parts/sqlite $PYENV_ROOT
 
 echo ""
-echo "Clearing the default python variables..."
-unset PYTHONPATH
-unset PYTHONHOME
-
-echo ""
 echo "Building Python..."
 pyenv install $1
-pyenv shell $1
-pyenv rehash
 
 echo ""
-echo "Forgetting about the default python..."
-rm -rf .heroku/python
-
-echo ""
-echo "Installing Setuptools..."
-pip install setuptools
-./parts/install-boto.py
-pyenv rehash
-
-echo ""
-echo "Building HDF5..."
-./parts/hdf5
-
-echo ""
-echo "Building other python packages..."
-./parts/build-requirements
+echo "Installing the AWS cli..."
+pip install git+https://github.com/boto/bcdoc.git@develop
+pip install git+https://github.com/boto/jmespath.git@develop
+pip install git+https://github.com/boto/botocore.git@develop
+pip install git+https://github.com/aws/aws-cli.git@develop
