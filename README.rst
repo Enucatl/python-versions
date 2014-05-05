@@ -1,7 +1,7 @@
 Python Versions
 ===============
 
-compile a python version with [pyenv](https://github.com/yyuu/pyenv) to use it in your app.
+compile a python version with pyenv_ to use it in your app.
 I don't like the default python on heroku because I find it painful to
 extend, or do anything slightly nonstandard with it.
 
@@ -10,6 +10,9 @@ Tested versions
 
 - Stackless 3.2.2
 - CPython 3.4.0
+- CPython 2.7.6
+
+But it should work with any stable version of python as listed in pyenv.
 
 Deployment
 ----------
@@ -53,3 +56,5 @@ External libs are built by the parts/libs file into the .pyenv/lib folder
 The compilation takes several tens of minutes, and the dyno might be
 interrupted for some reason. If there are no errors, you just need to
 restart it.
+
+.. _pyenv: https://github.com/yyuu/pyenv
