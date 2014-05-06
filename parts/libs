@@ -14,6 +14,7 @@ rm -rf ${HDF5FILE}
 
 curl http://download.zeromq.org/zeromq-4.0.4.tar.gz | tar xf
 cd zeromq-4.0.4
+./autogen.sh
 ./configure --prefix=$PYENV_ROOT
 make
 make install
