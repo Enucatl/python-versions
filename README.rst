@@ -8,6 +8,7 @@ extend, or do anything slightly nonstandard with it.
 Tested versions
 --------
 
+- Stackless 3.3.5
 - Stackless 3.2.2
 - CPython 3.4.0
 - CPython 2.7.6
@@ -19,7 +20,7 @@ Deployment
 
 ::
 
-    $ git clone git@github.com:Enucatl/python-versions.git
+    $ git clone https://github.com/Enucatl/python-versions.git
     $ heroku create --region eu
     $ git push heroku master
     $ heroku config:set BUILDPACK_URL=https://github.com/Enucatl/heroku-buildpack-pyenv-builder.git
